@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BPO・営業事務代行事業 | 合同会社Nexterra</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bridge-navy: #0e2b5c;
+      --bridge-blue: #0056b3;
+      --bridge-cyan: #00a0e9;
+      --bridge-light-blue: #eef6fc;
+      --text-color: #333333;
+      --text-sub: #666666;
+      --bg-gray: #f8fafc;
+      --white: #ffffff;
+      --border-color: #e5e9f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-family: 'Noto Sans JP', sans-serif; color: var(--text-color); line-height: 1.8; }
+    body { padding-top: 85px; background-color: var(--white); overflow-x: hidden; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ヘッダー */
+    .header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); z-index: 1000; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; height: 85px; max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .logo { text-decoration: none; display: flex; align-items: baseline; gap: 6px; }
+    .logo-main { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: var(--bridge-navy); letter-spacing: -1px; }
+    .logo-sub { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: var(--bridge-cyan); }
+    .nav { display: flex; align-items: center; gap: 36px; }
+    .nav-list { display: flex; list-style: none; gap: 30px; }
+    .nav-list a { text-decoration: none; display: flex; flex-direction: column; align-items: center; position: relative; padding-bottom: 4px; }
+    .nav-list a .en { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--bridge-navy); letter-spacing: 1px; }
+    .nav-list a .jp { font-size: 10px; color: var(--text-sub); font-weight: 500; }
+    .nav-list a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px; background: var(--bridge-cyan); transition: all 0.3s ease; transform: translateX(-50%); }
+    .nav-list a:hover::after, .nav-list a.current::after { width: 100%; }
+    .nav-list a:hover .en, .nav-list a.current .en { color: var(--bridge-cyan); }
+    .btn-header-contact { background: var(--bridge-navy); color: var(--white); padding: 10px 22px; font-size: 13px; border-radius: 30px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+    .btn-header-contact:hover { background: var(--bridge-cyan); }
+
+    /* ハンバーガー */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1100; }
+    .hamburger span { width: 28px; height: 2px; background: var(--bridge-navy); transition: 0.3s; }
+
+    /* ページヘッダー */
+    .page-header { background: linear-gradient(135deg, var(--bridge-navy) 0%, #081d3f 100%); color: var(--white); padding: 80px 0 70px; text-align: center; }
+    .page-sub { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 3px; color: var(--bridge-cyan); display: block; margin-bottom: 8px; }
+    .page-header h1 { font-size: 38px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 12px; }
+    .page-header p { color: #cbd5e1; font-size: 15px; }
+
+    /* パンくず */
+    .breadcrumb-bar { background: var(--bg-gray); border-bottom: 1px solid var(--border-color); padding: 12px 0; }
+    .breadcrumb-list { display: flex; list-style: none; gap: 8px; font-size: 13px; color: var(--text-sub); }
+    .breadcrumb-list a { color: var(--bridge-blue); text-decoration: none; }
+    .breadcrumb-list li::after { content: '>'; margin-left: 8px; color: #a0aec0; }
+    .breadcrumb-list li:last-child::after { display: none; }
+
+    /* 詳細ページレイアウト */
+    .detail-page-section { padding: 90px 0; background-color: #ffffff; }
+    .detail-main-block { display: grid; grid-template-columns: 1fr 1.15fr; gap: 60px; align-items: center; margin-bottom: 70px; }
+    .detail-img-frame img { width: 100%; height: 380px; object-fit: cover; border-radius: 12px; box-shadow: 0 15px 35px rgba(14, 43, 92, 0.1); }
+    .detail-intro-text h2 { font-size: 28px; font-weight: 900; color: var(--bridge-navy); margin-bottom: 20px; line-height: 1.4; }
+    .detail-intro-text p { font-size: 15px; color: var(--text-sub); line-height: 1.9; }
+
+    /* メニューブロック */
+    .detail-features-block { background: var(--bg-gray); padding: 60px 45px; border-radius: 14px; margin-bottom: 60px; }
+    .section-title-wrap { margin-bottom: 40px; }
+    .title-en { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 3px; color: var(--bridge-cyan); display: block; margin-bottom: 4px; }
+    .title-jp { font-size: 28px; font-weight: 900; color: var(--bridge-navy); }
+    .title-line { width: 50px; height: 3px; background: var(--bridge-cyan); margin-top: 12px; }
+
+    .detail-feature-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .feature-item-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 10px; padding: 32px 26px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); }
+    .feature-badge { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 900; color: var(--bridge-blue); background: var(--bridge-light-blue); padding: 4px 12px; border-radius: 4px; display: inline-block; margin-bottom: 12px; }
+    .feature-item-card h3 { font-size: 18px; font-weight: 800; color: var(--bridge-navy); margin-bottom: 10px; }
+    .feature-item-card p { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+
+    .detail-back-row { text-align: center; }
+    .btn-bridge-sub { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--bridge-navy); border: 1.5px solid var(--bridge-navy); padding: 14px 30px; border-radius: 4px; font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .btn-bridge-sub:hover { background: var(--bridge-navy); color: var(--white); }
+
+    /* CTA & フッター */
+    .cta-banner { background: linear-gradient(135deg, var(--bridge-navy) 0%, #081d3f 100%); color: var(--white); padding: 80px 0; text-align: center; }
+    .cta-banner h2 { font-size: 30px; font-weight: 900; margin-bottom: 12px; }
+    .cta-banner p { color: #cbd5e1; margin-bottom: 24px; }
+    .btn-cta { display: inline-block; background: linear-gradient(135deg, var(--bridge-blue) 0%, var(--bridge-cyan) 100%); color: var(--white); padding: 16px 36px; border-radius: 4px; text-decoration: none; font-weight: 800; }
+    .footer { background: #09172e; color: #94a3b8; padding: 40px 0; text-align: center; font-size: 13px; }
+
+    /* スマホ対応（写真サイズ・レイアウト最適化） */
+    @media (max-width: 860px) {
+      .hamburger { display: flex; }
+      .nav {
+        position: absolute;
+        top: 85px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 85px);
+        background: var(--white);
+        flex-direction: column;
+        padding: 40px 24px;
+        transition: 0.3s;
+        border-top: 1px solid var(--border-color);
+      }
+      .nav.active { left: 0; }
+      .nav-list { flex-direction: column; text-align: center; gap: 24px; }
+
+      .detail-page-section { padding: 50px 0; }
+      .detail-main-block { grid-template-columns: 1fr; gap: 30px; margin-bottom: 40px; }
+      
+      /* 写真サイズをスマホ画面に合わせて自動調整 */
+      .detail-img-frame img {
+        height: 200px;
+        width: 100%;
+      }
+
+      .detail-intro-text h2 { font-size: 22px; margin-bottom: 14px; }
+      .detail-intro-text p { font-size: 14px; }
+      .detail-features-block { padding: 35px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="../../index.html" class="logo">
+        <span class="logo-main">Nexterra</span>
+        <span class="logo-sub">LLC.</span>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="../../index.html"><span class="en">HOME</span><span class="jp">ホーム</span></a></li>
+          <li><a href="../../aboutus/"><span class="en">COMPANY</span><span class="jp">会社情報</span></a></li>
+          <li><a href="../" class="current"><span class="en">SERVICE</span><span class="jp">事業案内</span></a></li>
+          <li><a href="../../contact/"><span class="en">CONTACT</span><span class="jp">お問い合わせ</span></a></li>
+        </ul>
+        <a href="../../contact/" class="btn-header-contact">お問い合わせ &rarr;</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ページヘッダー -->
+  <div class="page-header">
+    <div class="container">
+      <span class="page-sub">BUSINESS 01</span>
+      <h1>BPO・営業事務代行事業</h1>
+      <p>ルーティンワークを効率化し、チームが営業と顧客対応に集中できる体制を作ります。</p>
+    </div>
+  </div>
+
+  <!-- パンくずリスト -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <ul class="breadcrumb-list">
+        <li><a href="../../index.html">ホーム</a></li>
+        <li><a href="../">事業案内</a></li>
+        <li>BPO・営業事務代行事業</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 詳細本文 -->
+  <section class="section detail-page-section">
+    <div class="container">
+      
+      <div class="detail-main-block" data-aos="fade-up">
+        <div class="detail-img-frame">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80" alt="BPO事業詳細">
+        </div>
+        <div class="detail-intro-text">
+          <h2>ノンコア業務の徹底代行で、現場の生産性を最大化</h2>
+          <p>
+            商談準備や見積・請求処理、データ入力など、日々のバックオフィス業務に追われて営業活動に専念できないという課題を抱える企業は少なくありません。<br><br>
+            NexterraのBPOサービスでは、専任のオペレーションチームが貴社の実務フローに合わせて柔軟に業務を巻き取ります。単なる作業代行にとどまらず、マニュアル化やツールの活用による業務プロセスの改善までサポートします。
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-features-block" data-aos="fade-up">
+        <div class="section-title-wrap">
+          <span class="title-en">SERVICE SCOPE</span>
+          <h2 class="title-jp">主な対応業務・サービス内容</h2>
+          <div class="title-line"></div>
+        </div>
+
+        <div class="detail-feature-cards">
+          <div class="feature-item-card">
+            <span class="feature-badge">01</span>
+            <h3>営業事務・受発注管理代行</h3>
+            <p>見積書・請求書・納品書の作成・発行、受発注ステータスの管理、電子契約の締結サポートなど、営業活動に伴う事務処理をスピーディに代行します。</p>
+          </div>
+
+          <div class="feature-item-card">
+            <span class="feature-badge">02</span>
+            <h3>顧客データ・CRM/SFA運用代行</h3>
+            <p>SalesforceやHubSpot、kintone等のCRMツールへのデータ入力・更新、名刺のデータ化、商談履歴の記録、定期集計レポートの作成を担当します。</p>
+          </div>
+
+          <div class="feature-item-card">
+            <span class="feature-badge">03</span>
+            <h3>マニュアル作成・業務フロー改善</h3>
+            <p>属人化した業務を可視化し、標準手順書（SOP）を整備。将来的な社内内製化やチーム内での引き継ぎがスムーズになる仕組みを整えます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-back-row" data-aos="fade-up">
+        <a href="../" class="btn-bridge-sub">
+          <span>&larr;</span>
+          <span>事業案内一覧に戻る</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>BPO・営業事務代行に関するご相談</h2>
+      <p>業務の切り出し範囲や稼働時間、お見積りなどお気軽にお問い合わせください。</p>
+      <a href="../../contact/" class="btn-cta">無料相談・お見積りはこちら &rarr;</a>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Nexterra LLC. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    // ハンバーガー開閉
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+      document.querySelectorAll('.nav-list a, .btn-header-contact').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
