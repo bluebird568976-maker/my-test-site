@@ -1,0 +1,479 @@
+/* 全画面 人物スライド ＆ 幾何学フルアニメーション */
+.hero-fullscreen {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 85px);
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #0b1a30;
+}
+
+.hero-bg-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bg-slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.8s ease-in-out;
+}
+
+.bg-slide-item.active {
+  opacity: 1;
+}
+
+.bg-slide-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.15);
+  animation: heroBgZoom 8s linear infinite alternate;
+}
+
+@keyframes heroBgZoom {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.14); }
+}
+
+.hero-geometric-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.geo-shape {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.geo-white-mask {
+  left: 0;
+  width: 65%;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.94) 80%, rgba(255, 255, 255, 0) 100%);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+  animation: geoSlideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.geo-cyan-stripe {
+  left: 50%;
+  width: 35px;
+  background: linear-gradient(180deg, var(--bridge-cyan), var(--bridge-blue));
+  opacity: 0.85;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transform: skewX(-14deg);
+  animation: stripeSlide 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.geo-blue-layer {
+  right: 0;
+  width: 50%;
+  background: linear-gradient(135deg, rgba(14, 43, 92, 0.35) 0%, rgba(0, 160, 233, 0.25) 100%);
+}
+
+@keyframes geoSlideIn {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes stripeSlide {
+  0% { transform: translateX(200px) skewX(-14deg); opacity: 0; }
+  100% { transform: translateX(0) skewX(-14deg); opacity: 0.85; }
+}
+
+.hero-bg-watermark {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16vw;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.12);
+  letter-spacing: -6px;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-content-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.hero-text-wrap {
+  max-width: 680px;
+}
+
+.hero-badge-bridge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bridge-light-blue);
+  color: var(--bridge-blue);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.hero-badge-bridge .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--bridge-cyan);
+  border-radius: 50%;
+}
+
+.hero-giant-title {
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--bridge-navy);
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+}
+
+.word-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.word-anim {
+  display: block;
+  transform: translateY(110%);
+  animation: riseUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.word-1 { animation-delay: 0.2s; }
+.word-2 { animation-delay: 0.35s; }
+.word-3 { animation-delay: 0.5s; }
+
+@keyframes riseUp {
+  0% { transform: translateY(110%); }
+  100% { transform: translateY(0); }
+}
+
+.blue-glow {
+  background: linear-gradient(135deg, var(--bridge-blue) 0%, var(--bridge-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-lead-text {
+  font-size: 16px;
+  color: var(--text-sub);
+  line-height: 1.9;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.7s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 18px;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.9s forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* スクロールインジケーター */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.scroll-txt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--bridge-navy);
+}
+
+.scroll-track {
+  width: 2px;
+  height: 48px;
+  background: rgba(14, 43, 92, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-thumb {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--bridge-blue), var(--bridge-cyan));
+  animation: scrollTrackAnim 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollTrackAnim {
+  0% { top: -100%; }
+  50% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* ニュースバー */
+.news-ticker {
+  background: var(--bg-gray);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 0;
+}
+
+.news-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.news-label {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--bridge-navy);
+  color: var(--white);
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.news-content {
+  font-size: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.news-date {
+  color: var(--text-sub);
+}
+
+.news-title {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.news-title:hover {
+  text-decoration: underline;
+  color: var(--bridge-blue);
+}
+
+/* トップ理念 */
+.philosophy-section {
+  background: #ffffff;
+}
+
+.philosophy-content {
+  background: var(--bridge-light-blue);
+  border-radius: 8px;
+  padding: 45px 50px;
+  border-left: 6px solid var(--bridge-blue);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.philosophy-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 86, 179, 0.08);
+}
+
+.philosophy-text-block h3 {
+  font-size: 22px;
+  color: var(--bridge-navy);
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+.philosophy-text-block p {
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.9;
+}
+
+/* トップ事業プレビューカード */
+.service-preview-section {
+  background: var(--bg-gray);
+}
+
+.service-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.bridge-card {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.bridge-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(14, 43, 92, 0.12);
+  border-color: var(--bridge-cyan);
+}
+
+.card-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.bridge-card:hover .card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.card-number {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(14, 43, 92, 0.85);
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 2px 10px;
+  border-radius: 2px;
+}
+
+.card-body {
+  padding: 30px 26px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--bridge-cyan);
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.card-body h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--bridge-navy);
+  margin-bottom: 12px;
+}
+
+.card-body p {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.card-btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--bridge-blue);
+  text-decoration: none;
+  border-top: 1px solid var(--border-color);
+  padding-top: 14px;
+  transition: 0.3s;
+}
+
+.card-btn-link .arrow {
+  transition: transform 0.3s;
+}
+
+.bridge-card:hover .card-btn-link {
+  color: var(--bridge-cyan);
+}
+
+.bridge-card:hover .card-btn-link .arrow {
+  transform: translateX(6px);
+}
+
+/* スマホ対応（被り解消） */
+@media (max-width: 860px) {
+  .hero-fullscreen {
+    height: auto;
+    min-height: calc(100vh - 85px);
+    padding: 70px 0 60px;
+  }
+
+  .geo-white-mask {
+    width: 100%;
+    clip-path: none;
+    background: rgba(255, 255, 255, 0.94);
+  }
+
+  .geo-cyan-stripe {
+    display: none;
+  }
+
+  .hero-giant-title {
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+
+  .hero-lead-text {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* スマホでの被りを完全に防ぐためインジケーターを非表示 */
+  .hero-scroll-indicator {
+    display: none;
+  }
+}
